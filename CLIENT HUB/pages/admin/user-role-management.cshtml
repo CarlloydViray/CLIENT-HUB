@@ -1,0 +1,56 @@
+﻿@page
+@model BPOI_HUB.pages.admin.UserRoleMgmtPageModel
+@{
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="~/css/admin/user-role-management.css" />
+    <script src="~/js/admin/user-role-management.js"></script>
+</head>
+<body>
+    <br/>
+    <input type="text" class="form-control" id="filterUsername" placeholder="Filter Username">
+    <br />
+    <br />
+    <table class="table" id="dataTable">
+        <thead class="table-dark">
+        </thead>
+        <tbody id="table-body">
+        </tbody>
+
+    </table>
+    <div class="alert alert-danger" style="display:none;text-align:left;" id="errorMsg"></div>
+
+
+</body>
+@Html.AntiForgeryToken()
+
+
+<!-- Edit Role Modal -->
+<div class="modal" id="mEditRoleModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Edit Role</h5>
+                <button type="button" class="btn-close" aria-label="Close" onclick="$('#mEditRoleModal').hide();"></button>
+            </div>
+            <div class="container">                   
+                <div class="container mt-5">
+                    <div class="mb-3 input-group">
+                        <input type="text" class="form-control" placeholder="Filter Role" id="filterRole">
+                    </div>
+
+                    <ul class="list-group list-group-select" id="roleList">
+                    </ul>
+                </div>          
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="$('#mEditRoleModal').hide();">Cancel</button>
+                <button type="button" class="btn btn-primary" id="updateRole" onclick="saveRole()">Save</button>
+            </div>
+
+            <div class="alert alert-danger" style="display:none;text-align:left;" id="errorMsgNewRoleModal"></div>
+        </div>
+    </div>
+</div>

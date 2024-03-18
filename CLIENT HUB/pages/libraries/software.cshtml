@@ -1,0 +1,59 @@
+﻿@page
+@model BPOI_HUB.pages.libraries.SoftwareModel
+@{
+}
+<head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="~/css/Libraries/BPOIFormsAndTemplates.css" type="text/css" />
+
+</head>
+<div class="container d-flex justify-content-center">
+
+	<ul class="list-group mt-5 text-white">
+
+		@if(Model.Folders != null)
+		@foreach (var outerKvp in Model.Folders)
+		{
+			<li class="list-group-item d-flex justify-content-between align-content-center">
+				<div class="d-flex flex-row">
+					<img src="~/img/folder.png" onerror="this.src='/img/folder.png';" width="40" />
+					<div class="ml-2">
+						<a href="/libraries/software?folder=@Model.Folders[@outerKvp.Key]["url"]">
+						<h6 class="mb-0">@outerKvp.Key</h6>
+						<div class="about">
+							<span>@Model.Folders[@outerKvp.Key]["folderCount"] Folders @Model.Folders[@outerKvp.Key]["fileCount"] Files</span>
+							<span>@Model.Folders[@outerKvp.Key]["lastWriteTime"]</span>
+						</div>
+						</a>
+					</div>
+				</div>
+			</li>
+		}
+
+		@if (Model.Items != null)
+		@foreach (var outerKvp in Model.Items)
+		{
+			<li class="list-group-item d-flex justify-content-between align-content-center">
+				<div class="d-flex flex-row">
+					<img src="~/img/@Model.Items[@outerKvp.Key]["img"]" onerror="this.src='/img/file.png';" width="40" />
+					<div class="ml-2">
+							<a href="@Model.Items[@outerKvp.Key]["url"]" download>
+						<h6 class="mb-0">@outerKvp.Key</h6>
+						<div class="about">
+							<span>@Model.Items[@outerKvp.Key]["lastWriteTime"]</span>
+						</div>
+						</a>
+					</div>
+				</div>
+			</li>
+		}
+
+
+
+	</ul>
+
+	@if (TempData["ErrorMessage"] != null)
+	{
+		<div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+	}
+</div>

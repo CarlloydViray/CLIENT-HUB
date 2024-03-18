@@ -1,0 +1,35 @@
+﻿@page
+@model BPOI_HUB.pages.menu.AdminModel
+@using BPOI_HUB.model.menu;
+@using BPOI_HUB.model.user_management;
+@using System.Data;
+@{
+}
+
+<br />
+
+<div class="row">
+
+    @foreach (DataRow row in Model.app_dt.Rows)
+    {
+
+        <div class="col-xl-4 col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <img src="~/img/@row["image"]"
+                             alt=""
+                             style="width: 100px; height: 100px" />
+                        <div class="ms-3">
+                            <p class="fw-bold mb-1"><a href="@row["link"]">@row["name"]</a></p>
+                            <p class="text-muted mb-0">@row["description"]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+   
+
+</div>

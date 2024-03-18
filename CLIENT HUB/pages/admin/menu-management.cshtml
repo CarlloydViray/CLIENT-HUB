@@ -1,0 +1,121 @@
+﻿@page
+@model BPOI_HUB.pages.admin.MenuMgmtPageModel
+@{
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="~/css/admin/role-management.css" />
+    <script src="~/js/admin/role-management.js"></script>
+</head>
+<body>
+    <br />
+    <button type="button" class="btn btn-outline-primary" onclick='new_role_modal()'>
+        New
+    </button>
+    <br />
+    <br />
+    <table class="table" style="width: 80%" id="dataTable">
+        <thead class="table-dark">
+        </thead>
+        <tbody id="table-body">
+        </tbody>
+
+    </table>
+    <div class="alert alert-danger" style="display:none;text-align:left;" id="errorMsg"></div>
+
+
+
+@Html.AntiForgeryToken()
+
+
+<!-- Create New/Edit Role Modal -->
+<div class="modal" id="mNewRoleModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Create New Role</h5>
+                <button type="button" class="btn-close" aria-label="Close" onclick="$('#mNewRoleModal').hide();"></button>
+            </div>
+            <div class="modal-body">
+                <input type="text" class="form-control" id="inputRole" placeholder="Role Name">
+            </div>
+            <div class="container">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="client-tab" data-bs-toggle="tab" data-bs-target="#client-tab-pane" type="button" role="tab" aria-controls="client-tab-pane" aria-selected="true">Clients</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="menus-tab" data-bs-toggle="tab" data-bs-target="#menus-tab-pane" type="button" role="tab" aria-controls="menus-tab-pane" aria-selected="false">Menus</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="apps-tab" data-bs-toggle="tab" data-bs-target="#apps-tab-pane" type="button" role="tab" aria-controls="apps-tab-pane" aria-selected="false">Apps</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="client-tab-pane" role="tabpanel" aria-labelledby="client-tab" tabindex="0">
+                        <div class="container mt-5">
+                            <div class="mb-3 input-group">
+                                <input type="text" class="form-control" placeholder="Filter Client" id="filterClient">
+                            </div>
+
+                            <ul class="list-group list-group-select" id="clientList">
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="menus-tab-pane" role="tabpanel" aria-labelledby="menus-tab" tabindex="0">
+                        <div class="container mt-5">
+                            <div class="mb-3 input-group">
+                                <input type="text" class="form-control" placeholder="Filter Menus" id="filterMenus">
+                            </div>
+
+                            <ul class="list-group list-group-select" id="menuList">
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="apps-tab-pane" role="tabpanel" aria-labelledby="apps-tab" tabindex="0">
+                        <div class="container mt-5">
+                            <div class="mb-3 input-group">
+                                <input type="text" class="form-control" placeholder="Filter Apps" id="filterApps">
+                            </div>
+
+                            <ul class="list-group list-group-select" id="appList">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="$('#mNewRoleModal').hide();">Cancel</button>
+                <button type="button" class="btn btn-primary" id="saveRole" onclick="saveRole()">Save</button>
+            </div>
+
+            <div class="alert alert-danger" style="display:none;text-align:left;" id="errorMsgNewRoleModal"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Confirm Delete Modal -->
+<div class="modal" id="mConfirmDelete">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete Role</h5>
+                <button type="button" class="btn-close" aria-label="Close" onclick="delete_modal_close()"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to Delete this Role?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="delete_modal_close()">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirmDelete">Delete</button>
+            </div>
+
+            <div class="alert alert-danger" style="display:none;text-align:left;" id="errorMsgDeleteRoleModal"></div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

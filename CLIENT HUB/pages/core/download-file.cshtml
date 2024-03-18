@@ -1,0 +1,32 @@
+﻿@page
+@model BPOI_HUB.Pages.Shared.Core.DownloadFileModel
+@{
+    ViewData["Title"] = TempData["Title"];
+}
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="~/css/Core/FontAwesome/css/fontawesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/Core/FontAwesome/css/brands.min.css"      type="text/css" />
+    <link rel="stylesheet" href="~/css/Core/FontAwesome/css/solid.min.css"       type="text/css" />
+    <link rel="stylesheet" href="~/css/Core/Download/Download.css"               type="text/css" />
+
+</head>
+<body>
+    <br /><br />
+    <div class="mb-3">
+        <h4>@TempData["Title"]</h4>
+        <hr />
+        <h3>File : @TempData["FileName"]</h3>
+        <br/>
+        <form method="post" asp-page-handler="DownloadFile">
+            <input type="hidden" name="file" value="@TempData["FileName"]">
+            <button class="downloadBtn" type="submit"><i class="fa fa-download"></i> Download</button>
+        </form>
+    </div>
+
+    <br />
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
+</body>

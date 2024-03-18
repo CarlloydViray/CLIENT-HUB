@@ -1,0 +1,14 @@
+﻿
+.downloadBtn {
+    background-color: #198754;
+    border: none;
+    color: white;
+    padding: 12px 30px;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.downloadBtn:hover {
+    background-color: #00610f;
+}

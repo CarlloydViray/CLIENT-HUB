@@ -1,0 +1,57 @@
+﻿@page
+@model BPOI_HUB.pages.user_management.NewUserPageModel
+@using BPOI_HUB.model.user_management;
+@{
+
+
+    Layout = null;
+    
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New User Registration - BPOI HUB</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/user-management/new-user.css" type="text/css" />
+
+
+</head>
+<body>
+    <br />
+    <br />
+    <div class="signup-form">
+        <form method="post">
+            <h2>Register</h2>
+            <p>Please fill in this form to create an account!</p>
+            <hr>
+            <div class="form-group">
+                <input type="text" class="form-control" name="FirstName" placeholder="First Name" aria-describedby="FirstName" required="required">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="MiddleName" placeholder="Middle Name" aria-describedby="MiddleName">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="LastName" placeholder="Last Name" aria-describedby="LastName" required="required">
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" name="Email" placeholder="Email" aria-describedby="Email" required="required" pattern="^[a-zA-Z0-9._+-]+&#64;[a-zA-Z0-9.-]+\.[a-zA-Z]{2,9}$">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="Department" placeholder="Department" aria-describedby="Department" required="required">
+            </div>
+         
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-lg" asp-page-handler="Submit">Register</button>
+            </div>
+            @if (TempData["error_message"] != null)
+            {
+                <div class="alert alert-danger">@TempData["error_message"]</div>
+            }
+        </form>
+    </div>
+</body>
+</html>

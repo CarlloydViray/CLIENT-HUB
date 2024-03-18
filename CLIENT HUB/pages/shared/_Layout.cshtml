@@ -1,0 +1,115 @@
+﻿@using BPOI_HUB.model.debug
+@using BPOI_HUB.model.menu;
+@using BPOI_HUB.model.user_management;
+@using System.Data;
+@using System.Text.Json;
+@{
+
+    MenuManager mm = new MenuManager();
+    DataTable menuDT = new DataTable();
+
+    UserManager um = new UserManager();
+
+    if(um.IsSignedIn(Context))
+    {
+        string[]? allowed_menus_apps = JsonSerializer.Deserialize<string[]>(Context.Session.GetString("allowed_menus_apps"));
+        string url = (Context.Request.Path + Context.Request.QueryString).Trim();
+
+
+        if(allowed_menus_apps == null)
+            Context.Response.Redirect("/Index");
+
+        if(allowed_menus_apps.Count() == 0)
+            Context.Response.Redirect("/Index");
+
+        if(Array.IndexOf(allowed_menus_apps, url) == -1)
+            Context.Response.Redirect("/Index");
+ 
+        int[] menu_ids = JsonSerializer.Deserialize<int[]>(Context.Session.GetString("allowed_menu_ids"));
+            
+        if(menu_ids.Length > 0)
+            menuDT = mm.GetMainMenus(menu_ids);
+        else
+            menuDT = mm.GetMainMenus(new int[] { 0 });
+
+    }
+
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BPOI HUB</title>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <link rel="stylesheet" href="~/lib/bootstrap-5.3.2-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/Index">BPOI HUB</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+               
+                @foreach (DataRow row in menuDT.Rows)
+                {
+                    @if (row["type"].ToString() == "drop down")
+                    {
+
+                        DataTable submenuDT = mm.GetSubMenus((int)row["MenuId"]);
+
+                        if (submenuDT != null)
+                        {
+                            <li class="nav-item dropdown">
+                                <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">@row["name"]<span class="badge rounded-pill bg-danger">8</span></button>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    @foreach (DataRow subRow in submenuDT.Rows)
+                                    {
+                                        <li><a class="dropdown-item" href="#">@subRow["name"]</a></li>
+                                    }
+
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <ul class="navbar-nav">
+                                <li class="nav-item dropdown">
+                                    <a class="btn btn-dark" href="@row["link"]">@row["name"]</a>
+                                </li>
+                            </ul>
+                        }
+                    }
+                    else
+                    {
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a class="btn btn-dark" href="@row["link"]">@row["name"]</a>
+                            </li>
+                        </ul>
+                    }
+                }
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

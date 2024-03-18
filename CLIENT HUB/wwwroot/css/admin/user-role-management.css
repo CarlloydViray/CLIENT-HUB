@@ -1,0 +1,89 @@
+﻿.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-right: 10px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.editButton {
+    background-color: #008CBA;
+    color: white;
+    border: 2px solid #008CBA;
+}
+
+.editButton:hover {
+    background-color: white;
+    color: black;
+}
+
+.deleteButton {
+    background-color: #f44336;
+    color: white;
+    border: 2px solid #f44336;
+}
+
+.deleteButton:hover {
+    background-color: white;
+    color: black;
+}
+
+.modal-header .btn-close {
+    padding: 0.5rem 0.5rem;
+    margin: -0.5rem -0.5rem -0.5rem auto;
+}
+
+.list-group {
+    max-height: 200px;
+    margin-bottom: 10px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    font-size: smaller;
+}
+
+.list-group-select {
+    max-height: 400px;
+}
+
+.list-group-item{
+    padding: 0px 0px 0px 0px;
+}
+
+.list-group-item-admin {
+    background-color : aliceblue;
+}
+
+ul {
+    padding: 0px 0px 0px 0px;
+}
+
+.mt-5 {
+    margin-top: 1rem !important;
+}
+
+
+.form-check {
+    padding-left: 2em;
+}
+
+.admin-badge {
+    color: #ffffff;
+    background: #ff0000;
+    padding: 1px 4px;
+    border-radius: 4px;
+    font-size : smaller;
+}
+
+#dataTable {
+    width : 80%;
+
+}
+
+#filterUsername {
+    width: 80%;
+}
