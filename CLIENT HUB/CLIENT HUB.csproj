@@ -27,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="model\apps\tools\" />
     <Folder Include="modules\admin\" />
     <Folder Include="modules\api\admin\role-management\" />
     <Folder Include="modules\api\apps\" />

@@ -11,8 +11,25 @@
     <link rel="stylesheet" href="~/css/core/font-awesome/css/brands.min.css" type="text/css" />
     <link rel="stylesheet" href="~/css/core/font-awesome/css/solid.min.css" type="text/css" />
     <link rel="stylesheet" href="~/css/index.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+    <script src="~/js/index.js"></script>
 </head>
 <body>
+
+    @if (TempData["success"] != null)
+    {
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                Swal.fire({
+                    title: 'Success!',
+                    text: '@TempData["success"]',
+                    icon: 'success',
+                    showConfirmButton: true
+                });
+            });
+        </script>
+    }
 <br />
 <br />
 <div class="container d-flex align-items-center flex-column">
@@ -29,6 +46,8 @@
     <!-- Masthead Subheading-->
     <p class="masthead-subheading font-weight-light mb-0">Role : @Model.user.DisplayRoles() - Last Login : @Model.user.LastLogin - Department : @Model.user.Department</p>
 </div>
+
+
 
     
 </body>
